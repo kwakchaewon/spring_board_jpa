@@ -1,8 +1,6 @@
-package com.example.bootboard;
+package com.example.bootboard.question;
 
-import com.example.bootboard.domain.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
