@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: header">
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
 <body>
-<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+
+<!--추후 추가될 헤더-->
+<!--<div th:replace="fragments/bodyHeader :: bodyHeader" />-->
 
 <div class="container my-3">
 <table class="table">
