@@ -1,6 +1,9 @@
 package com.example.bootboard.question;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -33,4 +36,10 @@ public class QuestionService {
         question.setCreateDate(LocalDateTime.now());
         this.questionRepository.save(question);
     }
+
+    public Page<Question> getList(int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        return this.questionRepository.findAll(pageable);
+    }
+
 }

@@ -2,8 +2,10 @@ package com.example.bootboard;
 
 import com.example.bootboard.answer.AnswerRepository;
 import com.example.bootboard.question.QuestionRepository;
+import com.example.bootboard.question.QuestionService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -25,6 +27,9 @@ class BootboardApplicationTests {
 
 	@Autowired
 	private AnswerRepository answerRepository;
+
+	@Autowired
+	private QuestionService questionService;
 
 	@AfterEach
 	void afterEach(){
@@ -184,5 +189,17 @@ class BootboardApplicationTests {
 //        assertEquals(1, answerList.size());
 //        assertEquals("네 자동으로 생성됩니다.", answerList.get(0).getContent());
 //    }
+
+	/**
+	 *  Question 테이블 테스트 데이터 생성
+	 */
+//	@Test
+//	void createQuestion(){
+//		for(int i = 1; i<=300; i++){
+//			String subject = String.format("테스트 데이터: [%03d]",i);
+//			String content = String.format("[%03d]번째 게시글",i);
+//			this.questionService.create(subject,content);
+//		}
+//	}
 
 }
