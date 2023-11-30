@@ -28,8 +28,9 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-security' // 스프링 시큐리티
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity' // 타임리프 시큐리티
+	implementation 'org.springframework.boot:spring-boot-starter-security' // 시큐리티 사용을 위한 스타터
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6' // 타임리프 시큐리티 사용을 위한 의존성
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
