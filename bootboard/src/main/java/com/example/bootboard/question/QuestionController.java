@@ -6,11 +6,13 @@ import com.example.bootboard.user.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.List;
@@ -71,5 +73,45 @@ public class QuestionController {
         this.questionService.create(questionForm.getSubject(), questionForm.getContent(), siteUser);
         return "redirect:/question/list";
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/update/{id}")
+    public String questionUpdate(QuestionForm questionForm, @PathVariable("id") Integer id, Principal principal){
+
+        Question question = questionService.getQuestion(id);
+        if(!question.getAuthor().getUsername().equals(principal.getName())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
+        }
+        questionForm.setSubject(question.getSubject());
+        questionForm.setContent(question.getContent());
+        return "question_form";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/update/{id}")
+    public String questionUpdate(@Valid QuestionForm questionForm, BindingResult bindingResult,
+                                 Principal principal, @PathVariable("id") Integer id){
+        if (bindingResult.hasErrors()) {
+            return "question_form";
+        }
+
+        Question question = this.questionService.getQuestion(id);
+        
+        // 프론트 단에서 검증됐더라도 백앤드 단에서도 검증 단계가 있는 것이 좋음
+        if (!question.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
+        }
+
+        this.questionService.update(question,questionForm.getSubject(),questionForm.getContent());
+        return "redirect:/question/detail/{id}";
+    }
+
+
+
+
+
+
+
+
 
 }
