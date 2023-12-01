@@ -198,10 +198,7 @@ class BootboardApplicationTests {
 //		for(int i = 1; i<=300; i++){
 //			String subject = String.format("테스트 데이터: [%03d]",i);
 //			String content = String.format("[%03d]번째 게시글",i);
-//			this.questionService.create(subject,content);
+//			this.questionService.create(subject,content, null);
 //		}
 //	}
-
-
-
 }
