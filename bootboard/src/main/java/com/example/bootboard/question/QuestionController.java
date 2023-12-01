@@ -106,6 +106,22 @@ public class QuestionController {
         return "redirect:/question/detail/{id}";
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/delete/{id}")
+    public String questionDelete(@PathVariable("id") Integer id, Principal principal){
+
+        Question question = this.questionService.getQuestion(id);
+
+        // 프론트 단에서 검증됐더라도 백앤드 단에서도 검증 단계가 있는 것이 좋음
+        if (!question.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
+        }
+
+        this.questionService.delete(question);
+        return "redirect:/";
+    }
+
+
 
 
 
